@@ -4,8 +4,10 @@ import unittest
 from unittest import mock
 
 from helpers import Case, jpeg_bytes, xmp_packet
-from ratingsync import fsdb, gui, help
+from ratingsync import export, fsdb, gui, help
 from ratingsync.apply import Options
+
+HAS_EXIFTOOL = bool(export.find_exiftool())
 
 try:
     tk.Tk().destroy()
@@ -180,6 +182,7 @@ class Windows(Case):
         self.assertEqual(self.colours(section.table, "1"), [gui.BEFORE_COLOUR])
         self.assertIn(gui.AFTER_COLOUR, self.colours(section.table, "5"))
 
+    @unittest.skipUnless(HAS_EXIFTOOL, "ExifTool isn't in vendor/exiftool")
     def test_jpg_and_jpeg_of_one_photo_have_their_own_columns_and_both_get_written(self):
         self.photo("C.JPG", content=jpeg_bytes(xmp_packet(1)))
         self.photo("C.JPEG", content=jpeg_bytes(xmp_packet(3)))
