@@ -5,15 +5,15 @@ import sys
 import tkinter as tk
 from tkinter import font as tkfont, ttk
 
-from . import __version__
+from . import APP_NAME, __version__
 
 # Lines starting "# " are headings, "## " subheadings, "- " bullets; **text** is bold.
 MANUAL = """\
-# Rating Sync for FastStone
+# Photo Rating Sync
 
 FastStone Image Viewer is quick for a first pass through a shoot, but its star ratings stay inside FastStone. Rate a JPEG and its RAW stays unrated, so the rating filter only shows half of each pair, and Lightroom, Bridge and other apps never see the ratings at all.
 
-Rating Sync gives every file of a photo the same rating, and writes it where other apps can read it.
+Photo Rating Sync gives every file of a photo the same rating, and writes it where other apps can read it.
 
 ## What counts as one photo
 
@@ -158,14 +158,14 @@ def _scrolled(window):
 
 
 def show_manual(master):
-    window = _window(master, "Rating Sync: Manual", "760x700")
+    window = _window(master, f"{APP_NAME}: Manual", "760x700")
     window.doc = _scrolled(window)
     window.doc.show(MANUAL)
     return window
 
 
 def about_markup():
-    lines = [f"# Rating Sync for FastStone {__version__}", "",
+    lines = [f"# {APP_NAME} {__version__}", "", "For FastStone Image Viewer.", "",
              "**Free to use, share and change**, under the MIT License below.", "",
              "Made by Tiger.", "", "## Credits"]
     lines += [f"- **{name}** {text}" for name, text in CREDITS]
@@ -174,7 +174,7 @@ def about_markup():
 
 
 def show_about(master):
-    window = _window(master, "About Rating Sync", "640x600")
+    window = _window(master, f"About {APP_NAME}", "640x600")
     window.doc = _scrolled(window)
     window.doc.show(about_markup())
     window.doc.configure(state="normal")

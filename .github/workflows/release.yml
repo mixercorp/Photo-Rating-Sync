@@ -1,0 +1,55 @@
+# Builds PhotoRatingSync.exe from this repository's source on GitHub's Windows machines.
+# Runs only by hand (Actions tab) or when a version tag such as v0.2.0 is pushed; merging
+# to main triggers nothing. A tag build attaches the .exe to that tag's GitHub release.
+# Code signing through SignPath gets added here once the project is accepted.
+name: Release build
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install PyInstaller
+        run: python -m pip install pyinstaller==6.22.3
+
+      - name: Build
+        shell: pwsh
+        run: ./packaging/build.ps1
+
+      - name: Test
+        run: python -m unittest discover -s tests
+
+      - name: Check the version matches the tag
+        if: startsWith(github.ref, 'refs/tags/')
+        shell: pwsh
+        run: |
+          $v = (Get-Item dist\PhotoRatingSync.exe).VersionInfo.ProductVersion
+          if ("v$v" -ne "${{ github.ref_name }}") { throw "Tag ${{ github.ref_name }} doesn't match product version $v" }
+
+      - name: Checksum
+        shell: pwsh
+        run: (Get-FileHash dist\PhotoRatingSync.exe -Algorithm SHA256).Hash.ToLower() | Tee-Object dist\PhotoRatingSync.exe.sha256
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PhotoRatingSync
+          path: dist/PhotoRatingSync.exe*
+
+      - name: Attach to the release
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload ${{ github.ref_name }} dist/PhotoRatingSync.exe --clobber

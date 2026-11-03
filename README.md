@@ -1,8 +1,10 @@
-# Rating Sync for FastStone
+# Photo Rating Sync
+
+Keep star ratings in sync across a photo's RAW, JPEG, PSD and PNG files in FastStone Image Viewer.
 
 FastStone Image Viewer is fast for a first pass through a shoot, but its star ratings stay inside FastStone. Rate a JPEG and its RAW stays unrated, so the rating filter only shows half of each pair. Lightroom, Bridge and other apps never see the ratings at all.
 
-Rating Sync fixes both:
+Photo Rating Sync fixes both:
 
 - **Pairs match.** Rate any one file. After a sync, every file with that name in the folder (`IMG_0001.CR3`, `IMG_0001.JPG`, `IMG_0001.PSD`) carries the same rating, even if FastStone is hiding the RAWs.
 - **Other apps can see your ratings.** It writes them to `.xmp` sidecars and inside JPEG, PSD and PNG files.
@@ -12,7 +14,7 @@ For Windows, with FastStone Image Viewer 8.5. Not affiliated with or endorsed by
 
 ## How to use it
 
-1. Download `RatingSync.exe` and double-click it. There's nothing to install.
+1. Download `PhotoRatingSync.exe` from the [latest release](https://github.com/tigershao/Photo-Rating-Sync/releases/latest) and double-click it. There's nothing to install. Version 0.1.0 was called `RatingSync.exe`.
 2. Pick your photo folder; the app remembers the last one. Folders inside it are included unless you untick **Include subfolders**.
 3. Choose where else ratings should go, and click **Sync**. FastStone has to be closed first; the app reminds you if it's open.
 4. A window lists the photos that need syncing, one row per photo, with every format in its own column. Each cell shows that place's rating before and after, like `1→3`. An empty before means it had no rating, and an empty after means the rating is being cleared. Conflicts are at the top. Each list has its own buttons for setting everything at once. To set one photo, click in its **Final** column: a star, ✖ for unrated or ☠ for rejected. Click it again to skip the photo. Conflicts you don't set are skipped until next time.
@@ -41,7 +43,7 @@ The tool reads and edits FastStone's database, whose format isn't documented. It
 
 ## For developers
 
-Python 3.10 or later, standard library only. The app needs ExifTool for JPEGs; `packaging\build.ps1` fetches a pinned copy into `vendor\` and builds `dist\RatingSync.exe` with PyInstaller.
+Python 3.10 or later, standard library only. The app needs ExifTool for JPEGs; `packaging\build.ps1` fetches a pinned copy into `vendor\` and builds `dist\PhotoRatingSync.exe` with PyInstaller. Releases are built from this repository by the GitHub Actions workflow in `.github\workflows\release.yml`, using the same script.
 
 ```powershell
 python -m ratingsync                                       # the window
@@ -49,5 +51,20 @@ python -m ratingsync scan <folder> [--subfolders]          # report only
 python -m ratingsync sync <folder> [--conflicts faststone] [--dry-run]
 python -m unittest discover -s tests
 ```
+
+## Privacy
+
+This program will not transfer any information to other networked systems unless specifically requested by the user or the person installing or operating it. It reads and writes only the photo folder you pick, FastStone's database, and its own settings, backups and logs in `%LOCALAPPDATA%\RatingSync`.
+
+## Code signing policy
+
+Free code signing provided by [SignPath.io](https://about.signpath.io), certificate by [SignPath Foundation](https://signpath.org).
+
+- Committers and reviewers: [Tiger](https://github.com/tigershao)
+- Approvers: [Tiger](https://github.com/tigershao)
+
+Every release is built from this repository by GitHub Actions, and each signing request is approved by hand.
+
+## Licence
 
 MIT licence. Bundled software is listed in [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).
