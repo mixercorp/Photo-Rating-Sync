@@ -1,5 +1,6 @@
-# Builds dist\RatingSync.exe: fetches the pinned ExifTool, then bundles it with PyInstaller.
-# Run from the repository root, with PyInstaller installed in the active Python.
+# Builds dist\PhotoRatingSync.exe: fetches the pinned ExifTool, then bundles it with PyInstaller.
+# Run from the repository root, with PyInstaller installed in the active Python. The GitHub
+# Actions release workflow runs this same script, so local and release builds match.
 $ErrorActionPreference = "Stop"
 $version = "13.60"
 $sha256 = "548b1f4e0b713cd2a26824b34080c35db4e2d2edd166468eb38b1d55ada90c2e"  # exiftool.org/checksums.txt
@@ -16,5 +17,8 @@ if (-not (Test-Path vendor\exiftool\exiftool.exe)) {
     Remove-Item vendor\x -Recurse
 }
 
-python -m PyInstaller --noconfirm --onefile --windowed --name RatingSync `
+python packaging\version_info.py build\version_info.txt
+if ($LASTEXITCODE) { throw "version_info.py failed" }
+python -m PyInstaller --noconfirm --onefile --windowed --name PhotoRatingSync --version-file build\version_info.txt `
     --add-data "vendor\exiftool;exiftool" --add-data "THIRD-PARTY-NOTICES.md;." --add-data "LICENSE;." ratingsync\__main__.py
+if ($LASTEXITCODE) { throw "PyInstaller failed" }

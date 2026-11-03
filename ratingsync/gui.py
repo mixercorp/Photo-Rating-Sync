@@ -8,7 +8,7 @@ import tkinter as tk
 from collections import defaultdict
 from tkinter import filedialog, font as tkfont, messagebox, ttk
 
-from . import __version__, fsdb, help
+from . import APP_NAME, __version__, fsdb, help
 from .apply import Options, apply, load_state, preview, with_work
 from .scan import CONFLICT, EDIT_EXTS, JPEG_EXTS, OUT_OF_SCOPE, apply_bulk, scan
 
@@ -314,7 +314,7 @@ class SyncWindow(tk.Toplevel):
 class App(tk.Tk):
     def __init__(self):
         super().__init__()
-        self.title(f"Rating Sync for FastStone {__version__}")
+        self.title(f"{APP_NAME} {__version__}")
         self.db_path = fsdb.default_db()
         self.data_dir = fsdb.default_data_dir()
         self.events = queue.Queue()
@@ -395,7 +395,7 @@ class App(tk.Tk):
 
     def failed(self, message):
         self.busy(False)
-        messagebox.showerror("Rating Sync", message, parent=self)
+        messagebox.showerror(APP_NAME, message, parent=self)
 
     def busy(self, on, text="FastStone needs to be closed while syncing."):
         self.sync_button.state(["disabled"] if on else ["!disabled"])
@@ -404,7 +404,7 @@ class App(tk.Tk):
     def locate_db(self):
         if os.path.isfile(self.db_path):
             return True
-        messagebox.showinfo("Rating Sync", "FastStone's database wasn't found in the usual place. A portable "
+        messagebox.showinfo(APP_NAME, "FastStone's database wasn't found in the usual place. A portable "
                                            "FastStone keeps FSIV.db beside FSViewer.exe. Please point to it.",
                             parent=self)
         chosen = filedialog.askopenfilename(parent=self, filetypes=[("FastStone database", "FSIV.db")])
@@ -415,7 +415,7 @@ class App(tk.Tk):
     def sync(self):
         folder = self.folder.get().strip()
         if not os.path.isdir(folder):
-            messagebox.showerror("Rating Sync", "Choose a photo folder first.", parent=self)
+            messagebox.showerror(APP_NAME, "Choose a photo folder first.", parent=self)
             return
         if not self.locate_db():
             return
@@ -433,7 +433,7 @@ class App(tk.Tk):
 
     def warn_running(self):
         self.busy(False)
-        messagebox.showwarning("Rating Sync", "FastStone is open, and it locks its database. "
+        messagebox.showwarning(APP_NAME, "FastStone is open, and it locks its database. "
                                               "Close FastStone, then click Sync again.", parent=self)
 
     def run_scan(self, folder):
@@ -448,7 +448,7 @@ class App(tk.Tk):
     def scanned(self, photos, seen, state):
         self.busy(False)
         if not photos:
-            messagebox.showinfo("Rating Sync", f"{seen} total photos. All in sync already.", parent=self)
+            messagebox.showinfo(APP_NAME, f"{seen} total photos. All in sync already.", parent=self)
             return
         SyncWindow(self, photos, seen, lambda w: self.start_apply(w, state), self.job["options"])
 
@@ -467,7 +467,7 @@ class App(tk.Tk):
         if result.errors:
             lines += ["", f"{len(result.errors)} could not be written and will come back next time:"]
             lines += result.errors[:10]
-        (messagebox.showwarning if result.errors else messagebox.showinfo)("Rating Sync", "\n".join(lines), parent=self)
+        (messagebox.showwarning if result.errors else messagebox.showinfo)(APP_NAME, "\n".join(lines), parent=self)
 
 
 def main():
