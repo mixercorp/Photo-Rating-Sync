@@ -58,12 +58,12 @@ This program will not transfer any information to other networked systems unless
 
 ## Code signing policy
 
-Free code signing provided by [SignPath.io](https://about.signpath.io), certificate by [SignPath Foundation](https://signpath.org).
+Photo Rating Sync is published by Mixer Inc. Releases are signed as Mixer Inc with a certificate from [Microsoft Azure Artifact Signing](https://azure.microsoft.com/products/artifact-signing).
 
-- Committers and reviewers: [Tiger](https://github.com/tigershao)
-- Approvers: [Tiger](https://github.com/tigershao)
+- Committers and reviewers: [Tiger](https://github.com/tigershao), for Mixer Inc
+- Release approvers: [Tiger](https://github.com/tigershao), for Mixer Inc
 
-From version 0.2.0, every release is built from this repository by GitHub Actions, and each signing request is approved by hand. Version 0.1.0 was built before that and isn't signed.
+Signed releases are built from this repository by GitHub Actions and signed in the same run; nothing built elsewhere is signed. Version 0.1.0 and any release made before signing is set up aren't signed.
 
 ## Licence
 
