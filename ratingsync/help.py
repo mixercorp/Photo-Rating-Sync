@@ -167,7 +167,7 @@ def show_manual(master):
 def about_markup():
     lines = [f"# {APP_NAME} {__version__}", "", "For FastStone Image Viewer.", "",
              "**Free to use, share and change**, under the MIT License below.", "",
-             "Made by Tiger.", "", "## Credits"]
+             "Made by Mixer Inc.", "", "## Credits"]
     lines += [f"- **{name}** {text}" for name, text in CREDITS]
     lines += ["", "## Licence", ""]
     return "\n".join(lines)

@@ -1,6 +1,6 @@
 """Writes the Windows version details PyInstaller stamps into the .exe.
 
-SignPath requires the product name and version to be the same on every build, so both
+Signed releases need the product name and version to be the same on every build, so both
 come from here and from ratingsync/__init__.py, never typed by hand.
 """
 import os
@@ -9,7 +9,7 @@ import sys
 
 PRODUCT = "Photo Rating Sync"
 EXE = "PhotoRatingSync.exe"
-AUTHOR = "Tiger"
+PUBLISHER = "Mixer Inc"  # must match the legal name on the signing certificate
 
 
 def version():
@@ -23,11 +23,11 @@ def render():
     dotted = f"{major}.{minor}.{patch}"
     numbers = f"({major}, {minor}, {patch}, 0)"
     fields = {
-        "CompanyName": AUTHOR,
+        "CompanyName": PUBLISHER,
         "FileDescription": f"{PRODUCT} for FastStone Image Viewer",
         "FileVersion": dotted,
         "InternalName": "PhotoRatingSync",
-        "LegalCopyright": f"Copyright (c) 2026 {AUTHOR}. MIT License.",
+        "LegalCopyright": f"Copyright (c) 2026 {PUBLISHER}. MIT License.",
         "OriginalFilename": EXE,
         "ProductName": PRODUCT,
         "ProductVersion": dotted,
