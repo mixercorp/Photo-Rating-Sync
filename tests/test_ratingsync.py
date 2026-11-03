@@ -254,6 +254,7 @@ class Rules(Case):
         self.pair(5, 3)
         self.assertEqual(len(self.work(Options(raw_sidecar=False, embed_jpeg=False))), 1)
 
+    @unittest.skipUnless(HAS_EXIFTOOL, "ExifTool isn't in vendor/exiftool")
     def test_photo_is_gone_after_its_sync(self):
         self.pair(3, 0)
         self.run_sync()
