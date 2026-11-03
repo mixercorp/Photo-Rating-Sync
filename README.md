@@ -63,7 +63,7 @@ Free code signing provided by [SignPath.io](https://about.signpath.io), certific
 - Committers and reviewers: [Tiger](https://github.com/tigershao)
 - Approvers: [Tiger](https://github.com/tigershao)
 
-Every release is built from this repository by GitHub Actions, and each signing request is approved by hand.
+From version 0.2.0, every release is built from this repository by GitHub Actions, and each signing request is approved by hand. Version 0.1.0 was built before that and isn't signed.
 
 ## Licence
 
