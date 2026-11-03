@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+vendor/
+build/
+dist/
+*.spec
+# Kept on the author's machine only
+docs/
+skills/
