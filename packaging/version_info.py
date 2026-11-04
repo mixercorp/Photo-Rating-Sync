@@ -9,7 +9,7 @@ import sys
 
 PRODUCT = "Photo Rating Sync"
 EXE = "PhotoRatingSync.exe"
-PUBLISHER = "Mixer Inc"  # must match the legal name on the signing certificate
+PUBLISHER = "Mixer Inc."  # must match the legal name on the signing certificate
 
 
 def version():
@@ -27,7 +27,7 @@ def render():
         "FileDescription": f"{PRODUCT} for FastStone Image Viewer",
         "FileVersion": dotted,
         "InternalName": "PhotoRatingSync",
-        "LegalCopyright": f"Copyright (c) 2026 {PUBLISHER}. MIT License.",
+        "LegalCopyright": f"Copyright (c) 2026 {PUBLISHER} MIT License.",
         "OriginalFilename": EXE,
         "ProductName": PRODUCT,
         "ProductVersion": dotted,

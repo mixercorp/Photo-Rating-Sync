@@ -141,7 +141,7 @@ class Windows(Case):
     def test_about_shows_licence_and_credits(self):
         text = self.text_of(help.show_about(self.app))
         for words in (gui.__version__, "Free to use", "MIT License", "Permission is hereby granted", "ExifTool",
-                      "Phil Harvey", "not affiliated", "Made by Mixer Inc.", "Copyright (c) 2026 Mixer Inc"):
+                      "Phil Harvey", "not affiliated", "Made by Mixer Inc.", "Copyright (c) 2026 Mixer Inc."):
             self.assertIn(words, text)
         self.assertNotIn("Shao", text)
 
