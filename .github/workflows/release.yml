@@ -1,7 +1,7 @@
 # Builds PhotoRatingSync.exe from this repository's source on GitHub's Windows machines.
 # Runs only by hand (Actions tab) or when a version tag such as v0.2.0 is pushed; merging
 # to main triggers nothing. A tag build attaches the .exe to that tag's GitHub release.
-# Code signing as Mixer Inc through Azure Artifact Signing gets added here once the company check is done.
+# Code signing as Mixer Inc. through Azure Artifact Signing gets added here once the company check is done.
 name: Release build
 
 on:

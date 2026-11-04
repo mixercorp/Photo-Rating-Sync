@@ -58,10 +58,10 @@ This program will not transfer any information to other networked systems unless
 
 ## Code signing policy
 
-Photo Rating Sync is published by Mixer Inc. Releases are signed as Mixer Inc with a certificate from [Microsoft Azure Artifact Signing](https://azure.microsoft.com/products/artifact-signing).
+Photo Rating Sync is published by Mixer Inc. Releases are signed as Mixer Inc. with a certificate from [Microsoft Azure Artifact Signing](https://azure.microsoft.com/products/artifact-signing).
 
-- Committers and reviewers: [Tiger](https://github.com/tigershao), for Mixer Inc
-- Release approvers: [Tiger](https://github.com/tigershao), for Mixer Inc
+- Committers and reviewers: [Tiger](https://github.com/tigershao), for Mixer Inc.
+- Release approvers: [Tiger](https://github.com/tigershao), for Mixer Inc.
 
 Signed releases are built from this repository by GitHub Actions and signed in the same run; nothing built elsewhere is signed. Version 0.1.0 and any release made before signing is set up aren't signed.
 
