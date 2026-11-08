@@ -14,7 +14,7 @@ For Windows, with FastStone Image Viewer 8.5. Not affiliated with or endorsed by
 
 ## How to use it
 
-1. Download `PhotoRatingSync.exe` from the [latest release](https://github.com/tigershao/Photo-Rating-Sync/releases/latest) and double-click it. There's nothing to install. Version 0.1.0 was called `RatingSync.exe`.
+1. Download `PhotoRatingSync.exe` from the [latest release](https://github.com/mixercorp/Photo-Rating-Sync/releases/latest) and double-click it. There's nothing to install. Version 0.1.0 was called `RatingSync.exe`.
 2. Pick your photo folder; the app remembers the last one. Folders inside it are included unless you untick **Include subfolders**.
 3. Choose where else ratings should go, and click **Sync**. FastStone has to be closed first; the app reminds you if it's open.
 4. A window lists the photos that need syncing, one row per photo, with every format in its own column. Each cell shows that place's rating before and after, like `1→3`. An empty before means it had no rating, and an empty after means the rating is being cleared. Conflicts are at the top. Each list has its own buttons for setting everything at once. To set one photo, click in its **Final** column: a star, ✖ for unrated or ☠ for rejected. Click it again to skip the photo. Conflicts you don't set are skipped until next time.

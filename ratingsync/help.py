@@ -91,7 +91,7 @@ def licence_text():
         if root and os.path.isfile(path):
             with open(path, encoding="utf-8") as f:
                 return f.read()
-    return "MIT License. The full text is in the LICENSE file at github.com/tigershao/Photo-Rating-Sync."
+    return "MIT License. The full text is in the LICENSE file at github.com/mixercorp/Photo-Rating-Sync."
 
 
 class Document(tk.Text):
